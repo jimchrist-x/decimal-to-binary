@@ -22,7 +22,7 @@ bool pop(STACK *stack_ptr, bool *x);
 
 int main(int argc, char const *argv[])
 {
-	STACK binary;
+	STACK *binary=malloc(sizeof(STACK));
 	unsigned int num;
 	bool bit;
 	do {
@@ -37,18 +37,19 @@ int main(int argc, char const *argv[])
 		
 		
 	} while(num>UINT_MAX || num<0);
-	INIT_STACK(&binary);
+	INIT_STACK(binary);
 
 	for (short int i=0;i<SIZE;i++) {
 		bit=num%2;
 		num/=2;
-		push(&binary, bit);
+		push(binary, bit);
 	}
 	for (short int i=0;i<SIZE;i++) {
-		pop(&binary, &bit);
+		pop(binary, &bit);
 		printf("%d",bit);
 	}
 	printf("\n");
+	free(binary);
 	return 0;
 }
 void INIT_STACK(STACK *stack_ptr) {
